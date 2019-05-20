@@ -217,13 +217,6 @@ ngx_ip2region_search(ngx_str_t *addr_text, ngx_str_t *isp, ngx_str_t *city)
     u_char city_buffer[64] = {0};
     ngx_snprintf(city_buffer, sizeof(city_buffer), "%*s%Z", end - pos_city, pos_city + 1);
 
-    if((isp_buffer[0] != '\0' && ngx_strcmp(isp_buffer, "移动") == 0) || isp_buffer[0] == '0') {
-        ngx_str_set(isp, "ONTISP_CM");
-
-    } else {
-        ngx_str_set(isp, "ONTISP_ALI");
-    }
-
     ngx_log_error(NGX_LOG_ERR, ngx_cycle->log, 0, "[%s(%V)] [%s]", isp_buffer, isp, city_buffer);
 #endif
     return NGX_OK;
